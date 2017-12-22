@@ -1,10 +1,10 @@
 # Site settings
-title: 
+title: A Journey Worth Taking
 header-img: img/home-bg.png
 email: adeel.a.mhd@gmail.com
 copyright_name: AAM77
 description: > # this means to ignore newlines until "baseurl:"
-  
+  Finding My Way to Programming
 baseurl: "" # the subpath of your site, e.g. /blog
 twitter_username: 
 github_username:  AAM77
