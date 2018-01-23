@@ -13,7 +13,7 @@ permalink:  learning_to_bash_-_the_basics_part_1
 
 <br/>
 
-<h3 style="color:blue;">Introducing Bash:</h3>
+<h2 style="font-style: bold; color:blue;">Introducing Bash:</h2>
 
 *This post introduces the basics of what a Terminal is, how to open it on a Mac OS X, setting up your first session, and how to customize the color theme.*
 
@@ -25,9 +25,9 @@ Put simply, the terminal is an application or program that you type different ke
 
 Today, most operating systems provide a graphical user interface (GUI) consisting of icons and various accompanying applications (apps) to help more user-friendly (and pleasing to look at). As a result, Bash is less likely to be used by the average user. This does not, however, mean that knowing Bash is useless. Rather, the Bash Terminal—or any command line interface—is a powerful tool that can make life a lot easier for users, particularly for aspiring software or web developers. In some instances, it is almost necessary. Therefore, I feel that every developer, regardless of level of expertise, should know at least the basics of Bash and some Bash commands.
 
+<br/>
 
-
-<h3 style="color:blue;">The Basics</h3>
+<h2 style="font-style: bold; color:blue;">The Basics</h2>
 
 **Opening the Shell or Terminal**
 
