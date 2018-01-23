@@ -58,7 +58,7 @@ Although it looks simplistic, there are different parts to the terminal. The fol
 
 <figure>
 <img id="terminal_image" src="https://i.imgur.com/4lkeeZ8.png" title="source: by Adeel M." style="height:400px" />
-<figcaption style="font-family: arial; font-size:14px; color:gray;">The Anatomy of a Terminal</figcaption>
+<figcaption style="font-family: arial; font-size:14px; color:gray;">The different parts of a Terminal window</figcaption>
 </figure>
 
 
