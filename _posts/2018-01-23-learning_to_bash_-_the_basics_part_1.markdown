@@ -25,7 +25,6 @@ Put simply, the terminal is an application or program that you type different ke
 
 Today, most operating systems provide a graphical user interface (GUI) consisting of icons and various accompanying applications (apps) to help more user-friendly (and pleasing to look at). As a result, Bash is less likely to be used by the average user. This does not, however, mean that knowing Bash is useless. Rather, the Bash Terminal—or any command line interface—is a powerful tool that can make life a lot easier for users, particularly for aspiring software or web developers. In some instances, it is almost necessary. Therefore, I feel that every developer, regardless of level of expertise, should know at least the basics of Bash and some Bash commands.
 
-<br/>
 
 
 <h4 style="color:blue;">The Basics</h4>
@@ -44,7 +43,6 @@ Shortform: Finder -> Applications -> Utilities -> Terminal
 
 Unlike Mac OS X, Linux offers more choices when it comes to terminal emulators, but my instructions deal with the native Terminal app already present on the Ubuntu operating system. To open it, open the Dash (Linux's start menu) by clicking on the Ubuntu icon in the upper-left corner. Type in "Terminal" without the quotation marks and double click the Terminal app that appears in the results.
 
-<br/>
 
 **Anatomy of the Terminal**
 
@@ -55,7 +53,6 @@ Once you have the terminal open, one of the first things you see should be a lin
 <figcaption style="font-family: arial; font-size:14px; color:gray;">A blank Terminal screen on my OS X laptop. I edited it to serve as an example.</figcaption>
 </figure>
 
-<br/>
 
 Although it looks simplistic, there are different parts to the terminal. The following image helps summarize this:
 
