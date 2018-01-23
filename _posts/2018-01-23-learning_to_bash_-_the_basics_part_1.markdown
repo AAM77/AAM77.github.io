@@ -13,7 +13,7 @@ permalink:  learning_to_bash_-_the_basics_part_1
 
 <br/>
 
-<h4 style="color:blue;">Introducing Bash:</h4>
+<h3 style="color:blue;">Introducing Bash:</h3>
 
 *This post introduces the basics of what a Terminal is, how to open it on a Mac OS X, setting up your first session, and how to customize the color theme.*
 
@@ -27,7 +27,7 @@ Today, most operating systems provide a graphical user interface (GUI) consistin
 
 
 
-<h4 style="color:blue;">The Basics</h4>
+<h3 style="color:blue;">The Basics</h3>
 
 **Opening the Shell or Terminal**
 
@@ -80,6 +80,6 @@ You can now choose from a handful of pre-defined themes or create a new theme wi
 Well, that's it for this post. I hope it was helpful.
 I will begin covering how to move around in the file system in my next post.
 
-<h4 style="font-style:bold; color:rgb(0,153,153);">Next up:</h4>
+<h3 style="font-style:bold; color:rgb(0,153,153);">Next up:</h3>
 <p style="font-style:italic; color:rgb(0,153,153);">Learning to Bash: The Basics of the Unix Filesystem</p>
 
