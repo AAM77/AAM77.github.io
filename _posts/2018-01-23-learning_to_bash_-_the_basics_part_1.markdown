@@ -72,7 +72,7 @@ You should see something like this:
 
 <figure>
 <img id="terminal_image" src="https://i.imgur.com/jINXKY0.png" title="source: by Adeel M." style="height:400px" />
-<figcaption style="font-family: arial; font-size:14px; color:gray;">Terminal Preferences</figcaption>
+<figcaption style="font-family: arial; font-size:14px; color:gray;">Terminal Preferences: Color Theme Selection</figcaption>
 </figure>
 
 You can now choose from a handful of pre-defined themes or create a new theme with custom colors by clicking the "+" symbol neat the bottom left. You may also change the font if you prefer. Once you have done this and are satisfied with the result, select your color theme's profile and click on the "Default" button near the bottom left of the window (near that "+" sign I mentioned earlier). Doing this will automatically load that theme each time you open a new session of the Terminal.
