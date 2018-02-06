@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Learning to Bash: The Basics of the Unix Filesystem"
-date:       2018-02-06 18:18:20 +0000
+date:       2018-02-06 13:18:21 -0500
 permalink:  learning_to_bash_the_basics_of_the_unix_filesystem
 ---
 
@@ -31,7 +31,7 @@ If you want to change directories and move into a different folder, you need to 
 A typical file tree on a unix based system looks as follows:
 
 <figure>
-<img src="https://i.imgur.com/zLW5LtF.png" title="source: imgur.com"  style="height:400px" />
+<img src="https://i.imgur.com/qnD2okO.png" title="source: imgur.com"  style="height:400px" />
 <figcaption style="font-family: arial; font-size:14px; color:gray;">An Example of a File Tree on Unix-based Systems</figcaption>
 </figure>
 
@@ -39,25 +39,25 @@ A typical file tree on a unix based system looks as follows:
 
 For this explanation, unless stated otherwise, assume that I we are logged in as the user **Joe**.
 
-Here, each folder contains the items attached to the main branch immediately below it. For example, the **/** (root) folder contains all of the items in the second row (i.e. **/bin**, **/dev**, **/etc**, **/usr**, **/tmp**, **/public**, and **/user**), which can be considered its child directories. Another example would be the **/user** folder, which contains the directories **/Foofoo** and **/Joe**, which are also the usernames for the accounts on this particular Mac computer.
+Here, each folder contains the items attached to the main branch immediately below it. For example, the **/** (root) folder contains all of the items in the second row (i.e. **/bin**, **/dev**, **/etc**, **/usr**, **/tmp**, **/public**, and **/Users**), which can be considered its child directories. Another example would be the **/user** folder, which contains the directories **/Foofoo** and **/Joe**, which are also the usernames for the accounts on this particular Mac computer.
 
 Just to avoid confusion, know that the number and names of the folders inside your root directory will be slightly different than here. If you are interested in creating your own filesystem tree, you can see which folders are in your second row (below the **/** root directory) by opening the terminal and typing *cd /*, hitting enter, and then listing the folders there, by typing *cd ls*:
 
 
 
-To go from one directory to another, you must move along the path of the tree. If you are in the same directory as the folder you wish to move into, then it is a simple matter of moving into it by typing *cd* and the name of the folder you wish to move into. So, assuming we are logged in with **Joe** as our account or user name, if we are in the **/User** directory and we want to move into **/Foofoo**, we would type *cd Foofoo*:
+To go from one directory to another, you must move along the path of the tree. If you are in the same directory as the folder you wish to move into, then it is a simple matter of moving into it by typing *cd* and the name of the folder you wish to move into. So, assuming we are logged in with **Joe** as our account or user name, if we are in the **/Users** directory and we want to move into **/Foofoo**, we would type *cd Foofoo*:
 
 ```
 MacName:users Joe$ cd Foofoo
 ```
 
-As soon as you hit the Enter key, the area immediately after "**MacName:**" should change from "**users**" to "**Foofoo**":
+As soon as you hit the Enter key, the area immediately after "**MacName:**" should change from "**Users**" to "**Foofoo**":
 
 ```
 MacName:Foofoo Joe$
 ```
 
-Note how the "**~**" has been replaced by "**Foofoo**". But, what if we were in the **/user** directory and we wanted to move into the **/Joe** directory while logged in with **Joe** as our account or user name? Well, we would simply type *cd Joe*:
+Note how the "**~**" has been replaced by "**Foofoo**". But, what if we were in the **/Users** directory and we wanted to move into the **/Joe** directory while logged in with **Joe** as our account or user name? Well, we would simply type *cd Joe*:
 
 ```
 MacName:users Joe$ cd Joe
@@ -69,7 +69,7 @@ which yields:
 MacName:Joe Joe$
 ```
 
-That's simple enough, isn't it? But, what if we wanted to move back into the **/users** folder (the parent directory of **Foofoo** and **Joe**)? In Bash, the command to move into the parent directory of the current folder your are in is "*..*". So, to move back into the **/users** directory, we would type *cd ..*:
+That's simple enough, isn't it? But, what if we wanted to move back into the **/Users** folder (the parent directory of **Foofoo** and **Joe**)? In Bash, the command to move into the parent directory of the current folder your are in is "*..*". So, to move back into the **/Users** directory, we would type *cd ..*:
 
 ```
 MacName:Foofoo Joe$ cd ..
@@ -91,7 +91,7 @@ Well, based on what we have discussed so far, which would need to move alone the
 
 Well, it doesn't have to be. Demonstrated as a flow diagram, this would be:
 
-**/Foofoo** --> **/users** --> **/** --> **/usr** --> **/lib**
+**/Foofoo** --> **/Users** --> **/** --> **/usr** --> **/lib**
 
 Typed out as a command, this would be: *cd ../../usr/lib*:
 
@@ -105,7 +105,7 @@ This yields:
 MacName:lib Joe$
 ```
 
-Recall that "*..*" allows us to move back into the parent directory. So, the first set of "*..*" moves us from **/Foofoo** to **/users** while the second set of "*..*" moves us from **/users** to **/** (root) and then we move follow a forward path by moving into **/usr** and then its child directory, **/lib**.
+Recall that "*..*" allows us to move back into the parent directory. So, the first set of "*..*" moves us from **/Foofoo** to **/Users** while the second set of "*..*" moves us from **/Users** to **/** (root) and then we move follow a forward path by moving into **/usr** and then its child directory, **/lib**.
 
 <br/>
 
@@ -118,9 +118,9 @@ For example, what if you were inside of a folder called "**/candyStash**" that h
 
 Trying to navigate from this folder into the previously discussed **/lib** directory or even back to the **/Desktop** directory would be a minor nightmare. Fortunately, there are a couple of shortcuts:
 
-First, let us discuss the **/users** directory again, which has the directories **/Foofoo** and **/Joe** in it. Well, these are 
+First, let us discuss the **/Users** directory again, which has the directories **/Foofoo** and **/Joe** in it. Well, these are 
 
-Wait, why did **users** change to "**~**" and not **Joe**? This is because "**~**" here means the home directory and, since we are logged in with **Joe** as our account or user name, we are in the home directory for **Joe**. If we were logged in as **Foofoo**, then typing *cd Joe* while in the **/users** directory would have changed **users** to **Joe** and not "**~**".
+Wait, why did **Users** change to "**~**" and not **Joe**? This is because "**~**" here means the home directory and, since we are logged in with **Joe** as our account or user name, we are in the home directory for **Joe**. If we were logged in as **Foofoo**, then typing *cd Joe* while in the **/Users** directory would have changed **Users** to **Joe** and not "**~**".
 
 ```
 MacName:Joe Foofoo$
