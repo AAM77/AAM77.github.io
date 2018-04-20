@@ -42,73 +42,138 @@ As it stands, the scraper's CLI allows the user to:
 (Typing 'exit' terminates the program).
 
 Choosing (1) and (2) returns to the main menu after executing.
-Choosing (3), (4), and (5) gives the user the option to run the same search again, 
+Choosing (3), (4), and (5) displays a list of the products that match the search query.
+The program then asks the user to enter the number of the item the user is interested in to display its full info
+It then gives the user the option to (1) run the same search again, (2) return to the main menu, and to exit the program by typing 'exit.'
+
+**REFACTORING MY APP** <br />
+
+Refactoring the code for my app was a process. I created a separate test files for cli.rb, product.rb, and scraper.rb file. I then copied the code over and began refactoring. After I had it setup in a way I felt would work, I copied the code in the test_cli.rb file, went back to the original cli.rb file, block commented out the previous code using =begin ... =end, and then pasted in the new code. I took a step-wise approach and tackled the part that printed the product information, as I wanted to add a 'Description' and 'How to Use' section to it. I noticed that the code was mostly identical in three of the methods, but had one line that differed. Some of these lines simply had to do with hard-coded strings that the program output as messages for the user's convenience and understanding. I decided to re-write them so that they were all identical. I then went in and removed a line of code from the match_product method that was extraneous. I also moved one of output messages to earlier in the method.
+
+After doing all this, the three methods had identical code to output the product info. I then created a method called full_product_info and pasted it in there, adding in a parameter (products) so that I could substitute it with the array I had created in each method to using Ruby's #collect method. Another part of the code in each of the methods that showed the initial search results now also had identical code, so I placed it in another method called display_search_results(products).
+
+This was all easy, however, compared to when I decided to create a universal sub-menu for options (3), (4), and (5). In its previous state, the scraper had a separate sub-menu method for options (3), (4), and (5). The problem was that the code is nearly identical except for a single line that called the respective search method recursively. I looked up how to remedy this by passing in a method name as a parameter. It would have looked as so:
+
+				 
+				 `
+def sub_menu(method_name)
+    puts "\nWhat now?"
+    puts "1. Search again"
+    puts "2. Return to main menu"
+
+    user_input = gets.downcase.strip
+
+    case user_input
+    when "1"
+        send(method_name)
+    when "2"
+        main_menu
+    else
+        puts "\nINVALID CHOICE"
+        send(__method__) #=> This runs the current method again
+    end
+  end
+								
+								`
+								
+The idea was to place this method inside of each sub_menu.
+
+Example:
+`
+
+   def match_product
+       puts "Enter product name: "
+       user_input = gets.downcase.strip
+       
+       ...(other code)...
+       
+       sub_menu(**:**match_product)
+
+
+  end # match_product
+   
+`
+
+and run that method again if the user entered "1." And, it worked beautifully---until I entered an "invalid choice," that is. Then it gave me an error indicating I did not provide enough arguments (the 'else' portion has no arguments).
+
+I tried using defauly parameters `def sub_menu(method_name = nil) `  and  `def sub_menu(*method_name)`.
+The former gave me an error when I encountered the 'else' in the case statement. The latter gave me an error when I selected "Search again," stating that it cannot call **[ ]**. I became frustrated at the amount of time I was spending trying to look up information to figure it out, so I decided to leave it alone for a while.
+
+Later, when I came back to it, I smacked myself in the forehead because I had overlooked a relatively obvious and simple solution: creating an instance variable and assigning it a value equal to the name of the method being run at a given time. So, I added in an instance variable called @current_method and refactored the universal sub-menu method's code to look as follows:
+
+```
+def display_sub_menu
+    sub_menu_options_text
+    user_input = gets.downcase.strip
+
+    case user_input
+    when "1"
+      send(@current_method)
+    when "2"
+      main_menu
+    when 'exit'
+      puts "Exiting program. Goodbye!"
+      exit
+    else
+      puts "\nINVALID ENTRY"
+      display_sub_menu
+    end # case user_input
+  end # display_sub_menu
+end # class CLI
+```
+
+I also placed the following line in it: @current_method = __method__. The __method__ object copies the name of the current method it is in and represents it as a symbol. I later changed this to the actual symbol representations of each of the methods' names.
+
+Example Usage of __method__:
+```
+def match_no_ingredient
+    puts "Enter ingredient name for a list of products:"
+    user_input = gets.downcase.strip
+
+    products = BeautyProduct::Product.all.select { |element| !element.ingredients_string.downcase.include?(user_input) if element.ingredients_string }
+    puts "\nSearching for products WITHOUT '#{user_input}' in their ingredients list..."
+
+    @current_method = __method__ #=> HERE IT IS <=#
+		
+    display_search_results(products)
+    display_sub_menu
+  end # match_yes_ingredient
+```
+
+In this case, @current_method = :match_no_ingredient
+
+
+I am glad I figured it out, and I learned a bit more on how to use yield, as well as other ways to assign method parameters, but I wasted several hours on this.
+
+I also attempted refactoring my scraper.rb and product.rb code to be more readable, but the scraping process ended up taking much longer even though the code looked more organized and readable. So, I commented out the refactored code and switched back to the previous code I was using. I will likely refactor it while waiting for my project assessment appointment, or afterwards.
+
+
+**POTENITAL WAYS TO IMPROVE MY APP** <br />
+
+
 The scraper could be improved in at least a few ways:
 (A) - It could provide a more unique list of ingredients.
          At present, the ingredients list does not remove extraneous text from the end of the ingredients. Since this includes
 				 notes that the product's manufacturer or web site's developer decided to add in, it can get rather difficult to filter it
 				 all out properly. Creative use of Ruby code plus regex may help me accomplish this, however.
 				 
-(B) - It could provide more item information.
-         At present, it scrapes the site for the product's description and usage instructions, but does not display it to the
-				 user. I chose to exclude these features for the time being due to time constraints.
+(B) - It could offer the option to return to the previous menu when asking the user to choose the product he/she wants
+         more info for.
+				 Currently, the user needs to input the product number he/she wants more info for before being offered the option to
+				 search again, return to the main menu, or exit.
 				 
-(C) - It could allow the user to create a username and populate a favorite's list, both of which are saved as persistent data.
+(C) - It could allow the user to choose a product when it lists out all available items.
+				 In its current state, the scraper only lists the products available for sale and then automatically returns to the main
+				 menu. The main idea was that the user could search for the item name after listing them out, but it would be useful if
+				 the user could choose directly from the full product list.
+ 
+(D) - It could allow the user to create a username and populate a favorite's list, both of which are saved as persistent data.
          I really wanted to add this feature in, but it is unnecessary for the project's requirements. I hope to learn more about
 				 how to do this and add it in as a pet project for my personal learning experience.
-				 
-(D) - A universal sub-menu would be great.
-         In its current state, the scraper has a separate method for options (3), (4), and (5). The problem is that the code is nearly identical. The only difference is a single line that recursively calls the same respective method. I looked up how to remedy this by passing in a method name as a parameter. It would have looked as so:
-
-				 
-				 ```
-				 
-				 def sub_menu(method_name)
-				        puts "\nWhat now?"
-								puts "1. Search again"
-								puts "2. Return to main menu"
-								
-				        user_input = gets.downcase.strip
-								
-								case user_input
-								when "1"
-								     send(method_name)
-							  when "2"
-								     main_menu
-								else
-								     puts "\nINVALID CHOICE"
-								     send(__method__) #=> This runs the current method again
-								end
-								
-								```
-								
-The idea was to place this method inside of each sub_menu.
-Example:
-```
-
-   def match_product
-	      puts "Enter product name: "
-				user_input = gets.downcase.strip
-				
-				...(other code)...
-				
-				sub_menu(**:**match_product)
-				
-  end # match_product
-   
-```
-
-and run that method again if the user entered "1." And, it worked beautifully---until I entered an "invalid choice," that is. Then it gave me an error indicating I did not provide enough arguments (the 'else' portion has no arguments).
-
-I tried using defauly parameters `def sub_menu(method_name = nil) `  and  `def sub_menu(*method_name)`.
-The former gave me an error when I encountered the 'else' in the case statement. The latter gave me an error when I selected "Search again," stating that it cannot call **[ ]**. I became frustrated at the amount of time I was spending trying to look up information to figure it out, so I decided to skip it for the time being. I am probably overlooking something and will find a solution soon enough.
+        
 
 
 That is about all I have to say on the matter, but you can check out my code at: https://github.com/AAM77/beautyproduct-cli-app
 
 Suggestions and **constructive** feedback is always more than welcome.
-
-
-So, remember the part where I said it's like writing an essay?
-I am going to leave this as is and proofread/edit it later.
 
