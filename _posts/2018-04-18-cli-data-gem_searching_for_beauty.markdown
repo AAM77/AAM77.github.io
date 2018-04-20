@@ -55,7 +55,8 @@ After doing all this, the three methods had identical code to output the product
 This was all easy, however, compared to when I decided to create a universal sub-menu for options (3), (4), and (5). In its previous state, the scraper had a separate sub-menu method for options (3), (4), and (5). The problem was that the code is nearly identical except for a single line that called the respective search method recursively. I looked up how to remedy this by passing in a method name as a parameter. It would have looked as so:
 
 				 
-				 `
+
+```
 def sub_menu(method_name)
     puts "\nWhat now?"
     puts "1. Search again"
@@ -73,14 +74,16 @@ def sub_menu(method_name)
         send(__method__) #=> This runs the current method again
     end
   end
+```
 								
-								`
+
 								
 The idea was to place this method inside of each sub_menu.
 
 Example:
-`
 
+
+```
    def match_product
        puts "Enter product name: "
        user_input = gets.downcase.strip
@@ -91,8 +94,9 @@ Example:
 
 
   end # match_product
+```
    
-`
+
 
 and run that method again if the user entered "1." And, it worked beautifully---until I entered an "invalid choice," that is. Then it gave me an error indicating I did not provide enough arguments (the 'else' portion has no arguments).
 
@@ -125,6 +129,7 @@ end # class CLI
 I also placed the following line in it: @current_method = __method__. The __method__ object copies the name of the current method it is in and represents it as a symbol. I later changed this to the actual symbol representations of each of the methods' names.
 
 Example Usage of __method__:
+
 ```
 def match_no_ingredient
     puts "Enter ingredient name for a list of products:"
@@ -162,10 +167,11 @@ The scraper could be improved in at least a few ways:
 				 Currently, the user needs to input the product number he/she wants more info for before being offered the option to
 				 search again, return to the main menu, or exit.
 				 
-(C) - It could allow the user to choose a product when it lists out all available items.
-				 In its current state, the scraper only lists the products available for sale and then automatically returns to the main
-				 menu. The main idea was that the user could search for the item name after listing them out, but it would be useful if
-				 the user could choose directly from the full product list.
+(C) - It could allow the user sub menu options after the ingredients list.
+				 In its current state, the scraper only lists the ingredients in all of the items on sale and then returns to the main
+				 menu. The main idea was that the user could search for the ingredient names as an optional reference for other
+				 main-menu options. I could improve it to offer sub-menu options after listing the ingredients and then allowed the
+				 user to choose the ingredient that want to look up products with and/or without that ingredient.
  
 (D) - It could allow the user to create a username and populate a favorite's list, both of which are saved as persistent data.
          I really wanted to add this feature in, but it is unnecessary for the project's requirements. I hope to learn more about
