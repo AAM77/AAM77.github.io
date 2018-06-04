@@ -1,11 +1,10 @@
 ---
 layout: post
-title:      "     What is Object-Relational Mapping (ORM)?"
-date:       2018-06-04 16:55:07 +0000
+title:      "     What is Object-Relational Mapping (ORM)? A Basic Understanding"
+date:       2018-06-04 12:55:08 -0400
 permalink:  what_is_object-relational_mapping_orm
 ---
 
-#                        A Basic Understanding
 
 
 The issue with storing data using only an Object-Oriented (OO) language is that the data it collects disappears once the application is closed. This is a problem since most apps created with OO languages require data to be persisted — that is, stored long term. The obvious solution is to store this information in some sort of database, but how do we go about this? Is there a way to use the OO language to store data in a database? Well, sort of.
