@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "The MANY-to-MANY Relationship in ActiveRecord"
-date:       2018-06-18 18:06:33 +0000
+date:       2018-06-18 14:06:33 -0400
 permalink:  the_many-to-many_relationship_in_activerecord
 ---
 
@@ -9,7 +9,7 @@ permalink:  the_many-to-many_relationship_in_activerecord
 
 ### { The TL; DR version }
 
-I had trouble understanding how to implement the many-to-many relationship in ActiveRecord. This blog post is not meant to be in-depth. It is more of a "how-to" for establishing the equivalent of a join table in activerecord.
+This post serves as more of a "how-to" guide than an in-depth explanation on many-to-many relationships in ActiveRecord.
 
 To establish a many-to-many between table_1 and table_2:
 
@@ -43,9 +43,11 @@ class Table_2 < ActiveRecord::Base
 end
 ```
 
-
+<br>
 
 ### { The Long Version }
+
+I had trouble understanding how to implement the many-to-many relationship in ActiveRecord, so I wrote a blog post to help myself connect the dots. Again, this blog post is not meant to be in-depth. It is more of a "how-to" for establishing the equivalent of a join table in activerecord.
 
 To establish a many-to-many relationship between tables in a database, we would create a separate join table containing foreign-key columns for each of the tables. This would then effectively link up the tables in a many-to-many relationship and we woud be able to extract data of interest using the appropriate join syntax.
 
