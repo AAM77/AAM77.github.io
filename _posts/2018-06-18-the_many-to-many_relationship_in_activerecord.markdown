@@ -13,7 +13,7 @@ This post serves as more of a "how-to" guide than an in-depth explanation on man
 
 To establish a many-to-many between table_1 and table_2:
 
-Assuming you have files for table_1 and table_2, names *table_1.rb* and *table_2.rb*, respectively, create a new file to serve as a join file/table: let's call ours *table1_table2.rb*.
+Assuming you have files for table_1 and table_2, named *table_1.rb* and *table_2.rb*, respectively, create a new file to serve as a join file/table: let's call ours *table1_table2.rb*.
 
 Then, add the following associations to the file:
 
@@ -60,13 +60,13 @@ We have three models:
 
 In this design, we need to define the following relationships:
 
-A book belongs to one author ---> Belongs to only ONE author (one-to-one)
+A book belongs to one author ---> Belongs to only ONE author (one-to-one) <br>
 A book can have many genres ---> Has Many genres (one-to-many)
 
-An author can write many books. ---> Has Many Books (one-to-many)
+An author can write many books. ---> Has Many Books (one-to-many) <br>
 An author can write books in many genres ---> Has Many genres (one-to-many, through another)
 
-A genre can include many books ---> Has Many books (one-to-many)
+A genre can include many books ---> Has Many books (one-to-many) <br>
 A genre can include many authors ---> Has Many authors (one-to-many, through another)
 
 We can establish the one-to-one relationships using 'belongs_to :table_name  .
@@ -93,7 +93,9 @@ class Author
      has_many :genres, through books
 end
 
-# think of the has_many, through relationship as: they can only have a genre once they write a book. No book, No genre
+# think of the has_many, through relationship as:
+# they can only have a genre once they write a book.
+# No book, No genre
 ```
 <br>
 **genre.rb**
@@ -103,7 +105,9 @@ class Genre
      # needs a has_many association to books
 end
 
-# think of the has_many, through relationship as: you can’t say an author has written in a particular genre of books if he/she has never written a book in that genre. No book, No author
+# think of the has_many, through relationship as:
+# you can’t say an author has written in a particular genre of books if he/she has never written a book in that genre.
+# No book, No author
 ```
 
 <br>
@@ -112,7 +116,7 @@ end
 
 The relationship we are interested in now is the many-to-many relationship between books and genres.
 
-1 book -> Many genres
+1 book -> Many genres <br>
 1 genre -> Many books
 
 This is effectively a Many-to-Many relationship, which means that many books can have many genres (and vice versa).
@@ -128,7 +132,7 @@ Doing so will allows us to:
 
 Within the book_genre class, we establish a one-to-one relationship to a genre and a one-to-one relationship to a book.
 
-So, the code would look somethingl ike the following:<br>
+So, the code would look something like the following:<br>
 ```
 class BookGenre
      belongs_to :book
