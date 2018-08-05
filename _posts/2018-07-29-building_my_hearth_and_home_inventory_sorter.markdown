@@ -1,11 +1,12 @@
 ---
 layout: post
 title:      "Building My Hearth & Home || Inventory Sorter"
-date:       2018-07-29 20:53:40 +0000
+date:       2018-07-29 16:53:41 -0400
 permalink:  building_my_hearth_and_home_inventory_sorter
 ---
 
 
+##### *[WIP]*
 
 You can find the app here:
 https://github.com/AAM77/hearth_and_home_inventory
@@ -21,7 +22,9 @@ I also learned that using ‘unless’ with negations is preferred, as is using 
 
 Also, I don't go into too much detail in this blog. I am going to make a video that outlines everything. It was a long process and I encountered several headache inducing issues that I eventually figured out. I will link to the video at a future date.
 
-My next step is to deploy it to Heroku and then work on the app again after graduation to improve it.
+The link to web-app on heroku is: https://hh-inventorysorter-sinatra.herokuapp.com/
+
+My next step is to work on the app again after graduation to improve it.
 
 
 ### ** [ The Long Version ] **
@@ -369,7 +372,7 @@ I could not get the validation messages to work correctly, so I manually created
 
 My future plans include:
 
-(1) Upload to Heroku
+ - (1) Upload to Heroku - [ DONE ]
 (2) Add a password reset feature
 (3) Add a "Log in with Facebook/Google" feature, so that they can handle all of the username/password headaches.
 (4) Add in the ability to upload images and videos (as time permits).
@@ -377,4 +380,8 @@ My future plans include:
 (6) Read up on good habits and conventions to follow when coding.
 (7) Implement these good habits and conventions.
 (8) Write blogs about the useful techniques I learned
+
+#### **The Link to the App on Heroku**
+
+You can try out the app on Heroku by visiting: https://hh-inventorysorter-sinatra.herokuapp.com/
 
