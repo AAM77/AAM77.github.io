@@ -8,8 +8,17 @@ permalink:  building_my_hearth_and_home_inventory_sorter
 
 ##### *[WIP]*
 
-You can find the app here:
+You can find the app on Github:
+
+(non-Heroku version)
 https://github.com/AAM77/hearth_and_home_inventory
+
+(Heroku version)
+https://github.com/AAM77/hearth_and_home_inventory_sorter_HEROKU
+
+
+The link to web-app on heroku is [here](https://hh-inventorysorter-sinatra.herokuapp.com/)
+
 
 
 ### ** [ The TL;DR version ] **
@@ -21,8 +30,6 @@ https://github.com/AAM77/hearth_and_home_inventory
 I also learned that using ‘unless’ with negations is preferred, as is using ‘single quotes’ except for cases involving interpolation.
 
 Also, I don't go into too much detail in this blog. I am going to make a video that outlines everything. It was a long process and I encountered several headache inducing issues that I eventually figured out. I will link to the video at a future date.
-
-The link to web-app on heroku is: https://hh-inventorysorter-sinatra.herokuapp.com/
 
 My next step is to work on the app again after graduation to improve it.
 
@@ -380,8 +387,4 @@ My future plans include:
 (6) Read up on good habits and conventions to follow when coding.
 (7) Implement these good habits and conventions.
 (8) Write blogs about the useful techniques I learned
-
-#### **The Link to the App on Heroku**
-
-You can try out the app on Heroku by visiting: https://hh-inventorysorter-sinatra.herokuapp.com/
 
