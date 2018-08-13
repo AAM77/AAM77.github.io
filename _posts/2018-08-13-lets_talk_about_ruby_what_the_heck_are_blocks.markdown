@@ -115,7 +115,7 @@ Hello
 Hello
 ```
  
-We called a ruby method here called *<a href='https://ruby-doc.org/core-2.4.0/Integer.html#method-i-times' target='_blank'>#times</a>*.  This built-in Ruby method accepts a block and repeats that action of the number of times specified (by an integer). Here, we essentially told it to output 'Hello' five (5) times.
+We called a ruby method here named *<a href='https://ruby-doc.org/core-2.4.0/Integer.html#method-i-times' target='_blank'>#times</a>*.  This built-in Ruby method accepts a block and repeats that action of the number of times specified (by an integer). Here, we essentially told it to output 'Hello' five (5) times.
 <br>
 <br>
 
