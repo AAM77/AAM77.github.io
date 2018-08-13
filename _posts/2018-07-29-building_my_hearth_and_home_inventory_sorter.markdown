@@ -21,11 +21,17 @@ The link to web-app on heroku is [here](https://hh-inventorysorter-sinatra.herok
 
 
 
-### ** [ The TL;DR version ] **
+### ** { The TL;DR version } **
 
-(I plan on updating this blog post with links to other relevant posts and videos I create. I just finished working on this and took far longer than I had planned, so I don't want to spend too much time on a detailed blog post, which would be too long anyway. I will proofread and update this as I have time).
-
- I had so much fun working on this project, but it had its challenges. The bumps in the road taught me a lot, including, but not limited to: (1) how to write and use procs, (2) what erb partials are and how to use them, (3) how to use yield properly, (4) a better understanding of ActiveRecord associations, (5) a better understanding of how RESTful routes work, (6) how validations work and how to skip validations using #save(validate: false) under certain conditions, (7) improved familiarity using bootstrap.
+I had a lot of fun working on this project, but it had its challenges. The bumps in the road taught me a lot, including, but not limited to:
+<br>
+<br>(1) how to write and use procs
+<br>(2) what erb partials are and how to use them
+<br>(3) how to use yield properly
+<br>(4) a better understanding of ActiveRecord associations
+<br>(5) a better understanding of how RESTful routes work
+<br>(6) how validations work and how to skip validations using #save(validate: false) under certain conditions
+<br>(7) improved familiarity using bootstrap.
 
 I also learned that using ‘unless’ with negations is preferred, as is using ‘single quotes’ except for cases involving interpolation.
 
@@ -33,23 +39,33 @@ Also, I don't go into too much detail in this blog. I am going to make a video t
 
 My next step is to work on the app again after graduation to improve it.
 
-
-### ** [ The Long Version ] **
-
 <br>
+### ** { The Long Version } **
+<br>
+
 #### **Description**
 
-The project is built on a relatively simple concept. A user registers and logs in. (S)he makes folders and categories. (S)he adds items to folders and categories. Moreover, users exist independently of one another—they cannot see each other’s content.
+I built project is built on a relatively basic concept.
+(1) A user registers and logs in.
+(2) The user makes folders and categories.
+(3) The user can create new items and add existing ones to folders and categories.
+(4) The user can delete the items, folders, and categories.
+(5) Moreover, users exist independently of one another—none of the users can see each other's content.
 
-In a sense, it is a catch-all for organizing and making an inventory of whatever the user desires. The inspiration for, it however, came from a discussion surrounding the usefulness of keeping an inventory of one’s possessions for insurance purposes. Now, the first thing that came to mind was allowing users to upload evidence in as image and videos.” This, however, requires a lot more storage than text alone. As a result, I decided to opt for text only for this project, especially since I planned on deploying it to Heroku.
+In a sense, it is a catch-all for organizing and making an inventory of whatever the user desires. The inspiration for it came from a discussion surrounding the usefulness of keeping an inventory of one’s possessions for insurance purposes. Now, the first thing that came to mind was allowing users to upload image and videos of the user's possessions. This, however, requires a lot more storage space than text alone. As a result, I decided to opt for text only for this project, especially since I planned on deploying it to Heroku or something similar.
 
 
 <br>
 #### **The Beginning (Planning)**
 
-I started by planning out what I needed to do. I did this by talking out what I wanted the program to do. Then, I wrote out what objects my program would need: (1) user, (2) items, (3) folders, (4) categories. I then wrote out a tree diagram that described how I wanted each of them to be associated.
 
+I started by talking out what I wanted the program to do. Then, I wrote out what objects my program would need:
+<br>(1) user
+<br>(2) items
+<br>(3) folders
+<br>(4) categories.
 
+Afterwards, I wrote out a tree diagram that described how I wanted each of them to be associated.
 
 
 ```
@@ -61,22 +77,22 @@ I started by planning out what I needed to do. I did this by talking out what I 
 A Category   -----   belongs to one user (belongs_to)
 Categories   -----   can have many items (has_many)
       Item   -----   belongs to one user (belongs_to)
-      Item   -----   belongs to one folder (belongs_to)
-      Item   -----   belongs to one category (belongs_to)
+      Item   -----   belongs to one folder (belongs_to)   # => Changed this to (has_many) later on - see below
+      Item   -----   belongs to one category (belongs_to) # => Changed this (has_many) later on - see below
 ```
 
-I changed the item’s associations in the end so that any unique item can belong to multiple categories and folders. The reason for this change was because I was thinking of “work” and “home” folders. But, then quickly realized that I might want to add that same item (with a unique id) to a category or multiple categories. Maybe someone wants to create a “books” folder and wants to add the same book to both folders.
+I later changed the associations for items so that any unique item can belong to multiple categories and folders. The reason for this change was because I realized that I might want to add that same item to anoted folder or multiple folderss.
 
-So, the final associations for the Item’s relationship with folders and categories to be:
+As a result, I changed an Item’s relationship with folders and categories to be:
 
 ```
        Item   -----    can have many folders (has_many)
        Item   -----    can have many categories (has_many)	
 ```
 
-I now had a has_many on folders and items, as well as on categories and items. This created a many_to_many relationship between them. Well, I made join tables to address this, which I wont’s go into detail here. You can check a blog post I wrote on how to set these up in the models (http://adeelstechbeat.net/the_many-to-many_relationship_in_activerecord).
+I now had a two way ' has_many ' relationship between folders and items and between categories and items. This created a many_to_many relationship between each of the pairs. I made join tables to address this, but I won't go into the detail shere. You can check a blog post I wrote on how to set these up in the models using ActiveRecord:  <a href="http://adeelstechbeat.net/the_many-to-many_relationship_in_activerecord" target='_blank'>Establishing a Many-to-Many Relationship</a>.
 
-I then wrote out a basic MVC file structure on how I wanted it to look:
+After I was done planning out the associations, I wrote out a basic MVC file structure to get an idea of what I would need:
 
 ```
 
@@ -131,10 +147,10 @@ VIEWS:
 
 ```
 
-
-Beyond this, though, I had nothing set up and did not know where to begin. I decided to look online for a gem that would create a basic skeleton structure for Sinatra apps. Fortunately, I came across Corneal (https://github.com/thebrianemory/corneal). Corneal was developed by Brian Emory, who was a former Learn Verified student at Flatiron. The gem created a file structure similar to what I had been working with so far in Flatiron. It also provided a basic erb test page that told me everything was running as intended. This made getting started much easier.
-
-I had basic features in mind, but I went through a process of adding and removing features as I worked on the website’s design. 
+I had nothing set up beyond this, though, and didn't know where to begin, so I decided to look online for a gem that would create a basic skeleton structure for Sinatra apps. Fortunately, I came across a gem called <a href='https://github.com/thebrianemory/corneal' target='_blank'>Corneal</a>.
+<br>
+<br>
+Corneal was developed by Brian Emory, who was a former Learn Verified student at Flatiron. The gem created a file structure similar to what I had been working with so far in Flatiron. It also provided a basic erb test page that told me everything was running as intended. This made getting started much easier.
 
 
 ### **Some Challenges**
@@ -143,17 +159,19 @@ I had basic features in mind, but I went through a process of adding and removin
 
 **[1] Tracking the Current User**
 
-I wanted to make sure that a user could login and logout. I needed a way for my program to recorgnize and keep track of who was logged in at any given instance.
+I wanted to make sure that a user could log in and log out. I needed a way for my program to recognize and keep track of who was logged in at any given time.
 
 I addressed this by:
-First, setting up a route for sign up and login. After passing a series of tests, the sign up route creates a new user and a new session hash ``` session[user_id]``` . The login does the same thing, except that it finds the user's entered username among existing users in User.all. The logged in user's id is then assigned to session[user_id].
+First, setting up a route for sign up and login. After passing a series of tests, the sign up route creates a new user and a new session hash   ```   session[user_id]  ``` . The login does the same thing, except that it finds the user's entered username among existing users in User.all. The logged in user's id is then assigned to the user_id key in the session's hash.
 
-Like any key value pair in the params hash, this session hash's key-value pair is created for each user and exists until it is replaced or cleared. This is why we create it only once on login and clear it on log out.
+Like any key value pair in the params hash, a session hash's key-value pair is created for each user and exists until it is replaced or cleared. This is why we create it only once on login and clear it on log out.
 
-I used the session[user_id]'s value (if it exists) to track the current user easily and check if the user is logged in.
+I used the session[user_id]'s value (if it existed) to track the current user easily and check if the user is logged in.
 
+<br>
 I created two method to handle this:
-(1) current_user, which locates the user by find_by(id: ) using the session[user_id]'s value for the id and assigns it to an instance variable @current_user
+<br>
+<br>(1) current_user, which locates the user by find_by(id: ) using the session[user_id]'s value for the id and assigns it to an instance variable @current_user
 
 (2) logged_in?, which checks if the instance variable @current_user exists. If it does, it returns a boolean of true.
 
@@ -172,61 +190,62 @@ I also wanted to make sure items, categories, and folders did not get created wi
 validates_presence_of :name
 ```
 
-I did have some issues with saving (updating) edits to my user because of the validations. It kept asking for a password.
-In hindsight, requesting a password as confirmation before hitting edit or delete would be a good feature, but I was able to get around this for the time-being by using
+This did cause some issues with saving (updating) edits for my user because of the validations. It kept asking for a password even though the form did not ask for a password.a
+In hindsight, requestin a password as confirmation as additional security upon clicking on edit or delete would have been a good feature, but I was able to get around this using a different tactic:
 
 ```
 @user.save(validate: false)
 ```
 
-This skip validations for that particular save and it allowed me to save edits to the user's info without requiring the user to enter a password.
+This the app to skip validations for that particular save, which allowed me to save edits to the user's info without requiring the user to enter a password.
 
 
 **[3] Creating a Secure Encrypted Password**
 
-The next thing I needed to address was to make sure the user's password is secure. I did this by using bcrypt gem and adding the following line of code to my user model:
+The next thing I needed to address was to make sure the user's password is secure. I did this by using the bcrypt gem and adding the following line of code to my user model:
 
 ```
 has_secure_password
 ```
 
-Bcrypt is a great gem in that it takes the input password and creates a hash using predefined rules. Now, hashes generally have keys that are able to make sense of them. The hash is created in the same way for each password, so two passwords would have the same hash. This allows admins (and hackers) to retrieve the passwords so long as they have the pattern/key that was used to generate the hash. Bcrypt does something extra, however: it salts the hash---that is it adds a completely randomly generated set of characters to each hash. This way, even two same passwords would have different hashes. It stores these hashes in password_digest.
+Bcrypt is a great gem in that it takes the input password and creates a hash using predefined rules. Generally speaking, hashes normally have "master" keys that are able to make decrypt and read the hash. This is a security concerns since the hash is created in the same way for each password, so two passwords would have the same hash. This allows admins (and hackers) to retrieve the passwords so long as they have the pattern/key that was used to generate the hash. Bcrypt does something extra, however: it salts the hash---that is it adds a completely randomly generated set of characters to each hash. This way, even two identical passwords would have different hashes. It stores these hashes in a password_digest.
 
-This means, of course, that the password can no longer be retrieved. If a user wants to change a password or forgets a passwords, the admin will need to generate a new random password for that user and send it to them using secure means. The user will then be able to use this to reset their password. It's a hassle, yes, but security comes with a price.
+This means, of course, that the password can no longer be retrieved. If a user wants to change a password or forgets a password, the admin will need to generate a new random password for that user and send it to them using secure means. The user will then be able to use this to reset their password. It's a hassle, yes, but security comes with a price.
 
-Of course, this does not means hackers cannot find the password. It would just take them a very long time.
+Of course, this does not mean hackers cannot find the password. It would just take them a very long time.
 
 ***I don't think I did a good job explaining it, so:***
 
 You can read more about bcrypt at:
-https://github.com/codahale/bcrypt-ruby
-https://www.youtube.com/watch?v=O6cmuiTBZVs
+<br><a href='https://github.com/codahale/bcrypt-ruby' target='_blank'>The Bcrypt Gem</a>
+<br><a href='https://www.youtube.com/watch?v=O6cmuiTBZVs' target='_blank'>Bcrypt on Youtube</a>
 
 You can also learn about password security at:
-https://www.youtube.com/watch?v=8ZtInClXe1Q
+<br><a href='https://www.youtube.com/watch?v=8ZtInClXe1Q' target='_blank'>Youtube Video on Password Security</a>
 
 
 **[4] Object Names**
 
-Another issue I ran into was  a concern over how to deal with names for the folders, objects, and items. I wanted to, for example, make it so each user had a folder for 'work' and 'home' and I wasn't sure at first if this would be an issue. Fortuantely, not. This is because each new folder would have a unique object id, different from every other object, even if the names are the same. Also, each object has a user_id associated with it, so I would be able to find the folder, category, or item, by using the object's id or by using the user's id and object's name.
+Another issue I ran into was  a concern over how to deal with names for the folders, objects, and items. I wanted to, for example, make it so each user had a folder for 'work' and 'home' upon account creation. but I wasn't how difficult this would cause issues with the folders overriding one another. Fortunately, this was not the case.. This is because each new folder would have a unique object id, different from every other object, even if the names are the same. Also, each object has a user_id associated with it (the current_user's id), so I would be able to find the folder, category, or item, by using the folder's id or by using the user's id and folder's name.
 
-This was slightly trickier for the item, as an item with the same name could belong to multiple users, but also to multiple folders and categories. So, to address this, I needed to also take the folder's or category's id into account.
+This was slightly trickier for the item, as an item with the same name could belong to multiple users, but also to multiple folders and categories. So, to address this, I needed to also take the folder's or category's id into account as well.
 
 **[5] Misc.**
 
-I ran into other issues as well, but I will not go into detail here, so I will just mention that I did try to include tests, but I veered away from it. This was unfortunate, as test driven development (TDD) is the best way to approach something like this. I did not have enough experience writing tests, so I was afraid it would take me much longer to complete the project if I went this route. I plan on learning TDD as I work my way through the next section of the curriculum.
+I ran into other issues as well, but I will not go into detail regarding those here. I will only mention that I did try to include tests, but I veered away from it. This was unfortunate, as test driven development (TDD) is the best way to approach something like this. I did not have enough experience writing tests, so I was afraid it would take me much longer to complete the project if I went this route.
 
 
 #### **Refactoring**
 
-The refactoring stage was, perhaps, the longest stage of development.
-Now, I should point out that I was done with this project ONE WEEK AGO. It was very simple in terms of visuals, but it behaved exactly as I wanted. The problem was, I could not get myself to hand it in with at least attempting to 'DRY' it.
-
-I had two models (folder and category) that behaved identically and had almost identical routes, that it added a lot of repetition to my code.
-
-(1) I had helper methods with different names and variables doing the exact same thing.
-(2) I had class and instance methods in each of the models doing the exact same thing.
-(3) I had almost identical views for folders and categories.
+The refactoring stage was the longest stage of development, but it was also the stage where I learned the most.
+I was done with this project within the first week of starting it. It was very simple in terms of visuals, but it behaved exactly as I wanted. The problem was it was not DRY. I could not get myself to hand it in with at least attempting to 'DRY' it.
+<br>
+<br>
+I had two models (folder and category) that behaved identically and had almost identical routes. This it added a lot of repetition to my code:
+<br>
+<br>(1) I had helper methods with different names and variables doing the exact same thing.
+<br>(2) I had class and instance methods in each of the models doing the exact same thing.
+<br>(3) I had almost identical views for folders and categories.
 
 **[1] application_controller.rb : Helper Methods**
 
@@ -376,15 +395,16 @@ This allowed me to address an issue when I needed the same style and behavior fo
 I overused some techniques (like partials). Sometimes, readability is more important than making an app DRY. Partials are great for inserting content into layouts, though.
 
 I could not get the validation messages to work correctly, so I manually created checks and flash messages in the controllers.
-
+<br>
+<br>
 My future plans include:
-
- - (1) Upload to Heroku - [ DONE ]
-(2) Add a password reset feature
-(3) Add a "Log in with Facebook/Google" feature, so that they can handle all of the username/password headaches.
-(4) Add in the ability to upload images and videos (as time permits).
-(5) Clean up the design using new techniques and knowledge I learn.
-(6) Read up on good habits and conventions to follow when coding.
-(7) Implement these good habits and conventions.
-(8) Write blogs about the useful techniques I learned
+<br>
+<br> - (1) Upload to Heroku - [ DONE ]
+<br>(2) Add a password reset feature
+<br>(3) Add a "Log in with Facebook/Google" feature, so that they can handle all of the username/password headaches.
+<br>(4) Add in the ability to upload images and videos (as time permits).
+<br>(5) Clean up the design using new techniques and knowledge I learn.
+<br>(6) Read up on good habits and conventions to follow when coding.
+<br>(7) Implement these good habits and conventions.
+<br>(8) Write blogs about the useful techniques I learned
 
