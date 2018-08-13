@@ -364,24 +364,29 @@ In the first erb, I had the top portion:
         <button class="btn btn-info btn-lg btn-block" type="button" data-toggle="collapse" data-target="#<%= collapse_num %>" aria-expanded="false" aria-controls="<%= collapse_num %>">
 ```
 
+<br>
 In another, I had the middle portion:
+<br>
 ```
+
     </button>
   </h5>
 </div>
 
 <div id="<%= collapse_num %>" class="collapse show" aria-labelledby="<%= heading_num %>" data-parent="#accordionExample">
   <div class="card-body">
-````
 
-And, in yet another, I had the bottom portion:
 ```
 
+<br>
+And, in yet another, I had the bottom portion:
+<br>
+
+```
       </div>
     </div>
   </div>
 </div>
-
 ```
 
 I called them in a separate erb (along with other html and erbs I inserted in between) to get my layout to look and behave the way I wanted it to.
