@@ -7,7 +7,7 @@ permalink:  the_many-to-many_relationship_in_activerecord
 
 
 
-### { The TL; DR version }
+### { Summary }
 
 This post serves as more of a "how-to" guide than an in-depth explanation on many-to-many relationships in ActiveRecord.
 
