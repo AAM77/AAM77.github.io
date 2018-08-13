@@ -7,7 +7,7 @@ permalink:  lets_talk_about_ruby_what_the_heck_are_blocks
 
 Note: Please excuse the poor formatting. The blog appears properly formatted when I preview it, but it messes up once it goes live. I will try to correct this.
 
-## { Summary }
+## **{ Summary }**
 
 This post talks about **blocks**, what they are, and some of the ways there are used. Before I get started, note that other programming languages may refer to **blocks** as *closures*.<br>
 <br>
@@ -16,13 +16,13 @@ This post talks about **blocks**, what they are, and some of the ways there are 
  One of the coolest ways **blocks** can be used are for *yield*. I provide examples of this, but I do not go into a lot of detail regarding that in this post.
  <br>
  <br>
- 
- ## { The Long version }
+
+## **{ The Long Version }**
  
 For Ruby beginners, it may be difficult to grasp what **blocks**  are, so I will try to guide you through it.
 <br>
  
-### Methods and Arguments (a review)
+### **Methods and Arguments (a review)**
 
 To understand a little bit about blocks, let's talk do a quick review of methods and arguments.<br>
 Normally, when we create (define) methods, we can choose to give it an argument, or we can choose not to.
@@ -73,9 +73,10 @@ Now, let's see how **blocks** work when called by a method.
 <br>
 <br>
 
-### Blocks
+### **{ Blocks }**
+<br>
 
-#### [1] Defining  Blocks:
+#### **[1] Defining  Blocks:**
 <br>
 Blocks are pieces of code that are often passed to methods in a way similar to arguments.<br>
 
@@ -86,7 +87,7 @@ If the block spans multiple lines, however, we often write it inside of **`do ..
 <br>
 <br>
 
-#### [2] Blocks in Action : *(without variables)*
+#### **[2] Blocks in Action : *(without variables)***
 
 <br>
 <br>
@@ -217,7 +218,7 @@ Note how the output changed based on what we passed in even though everything el
 <br>
 <br>
 
-#### [3] Blocks in Action : *(with variables)* 
+#### **[3] Blocks in Action : *(with variables)* **
 
 <br>
 *Note: I use an enumerator within a custom method, but it is unnecessary. Calling the *<a href='https://ruby-doc.org/core-2.5.0/Array.html#method-i-each' target='_blank'>#each</a>* method directly on the array would have been enough.* 
