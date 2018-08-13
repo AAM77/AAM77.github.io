@@ -114,7 +114,7 @@ We called a ruby method here named *<a href='https://ruby-doc.org/core-2.4.0/Int
 <br>
 <br>
 
-**Example 2: (`do ... end` - no variables)**
+**Example 2: (`do ... end` - without variables)**
 
 Let's look at the same example using **`do ... end`**.<br>
 (Note: the part within and including the **do** and **end** is the block)
