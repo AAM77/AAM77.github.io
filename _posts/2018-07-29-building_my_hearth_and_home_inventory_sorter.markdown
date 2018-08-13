@@ -251,9 +251,12 @@ I had two models (folder and category) that behaved identically and had almost i
 
 Now, this would have been simple enough if they had the same exact variables, etc, but they didn't. Also, different parts of my program needed the entire method, but needed to insert some line of code into a specific spot.
 
-Fortunately, I was able to address the latter using
+<br>
+Fortunately, I was able to address the latter using:
 
-```yield if block given?```
+```
+yield if block given?
+```
 
 I will cover in a separate blog post within the next two weeks and update this part by linking to it here.
 
@@ -357,11 +360,11 @@ Here are examples:
 
 In the first erb, I had the top portion:
 ``` 
-<div class="accordion" id="accordionExample">
-  <div class="card">
-    <div class="card-header" id="<%= heading_num %>">
-      <h5 class="mb-0">
-        <button class="btn btn-info btn-lg btn-block" type="button" data-toggle="collapse" data-target="#<%= collapse_num %>" aria-expanded="false" aria-controls="<%= collapse_num %>">
+<#div class="accordion" id="accordionExample">
+  <#div class="card">
+    <#div class="card-header" id="<%= heading_num %>">
+      <#h5 class="mb-0">
+        <#button class="btn btn-info btn-lg btn-block" type="button" data-toggle="collapse" data-target="#<%= #collapse_num %>" aria-expanded="false" aria-controls="<%= collapse_num %>">
 ```
 
 <br>
@@ -369,9 +372,9 @@ In another, I had the middle portion:
 <br>
 ```
 
-    </button>
-  </h5>
-</div>
+    <#/button>
+  <#/h5>
+<#/div>
 
 <div id="<%= collapse_num %>" class="collapse show" aria-labelledby="<%= heading_num %>" data-parent="#accordionExample">
   <div class="card-body">
@@ -383,10 +386,10 @@ And, in yet another, I had the bottom portion:
 <br>
 
 ```
-      </div>
-    </div>
-  </div>
-</div>
+      <#/div>
+    <#/div>
+  <#/div>
+<#/div>
 ```
 
 I called them in a separate erb (along with other html and erbs I inserted in between) to get my layout to look and behave the way I wanted it to.
