@@ -5,6 +5,7 @@ date:       2018-08-13 18:10:58 -0400
 permalink:  lets_talk_about_ruby_what_the_heck_are_blocks
 ---
 
+Note: Please excuse the poor formatting. The blog appears properly formatted when I preview it, but it messes up once it goes live. I will try to correct this.
 
 ## { Summary }
 
@@ -66,7 +67,6 @@ Here, **5** is **num1** and **10** is **num2**. The method plugs these arguments
 <br>
 <br>
 Simple enough, right?
-<br>
 <br>
 
 Now, let's see how **blocks** work when called by a method.
