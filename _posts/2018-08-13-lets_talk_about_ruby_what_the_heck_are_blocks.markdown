@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Let's Talk About Ruby: What the Heck are Blocks?"
-date:       2018-08-13 22:10:57 +0000
+date:       2018-08-13 18:10:58 -0400
 permalink:  lets_talk_about_ruby_what_the_heck_are_blocks
 ---
 
@@ -21,7 +21,7 @@ This post talks about **blocks**, what they are, and some of the ways there are 
 For Ruby beginners, it may be difficult to grasp what **blocks**  are, so I will try to guide you through it.
 <br>
  
-##### { Methods and Arguments (a review) }
+#### Methods and Arguments (a review)
 
 To understand a little bit about blocks, let's talk do a quick review of methods and arguments.<br>
 Normally, when we create (define) methods, we can choose to give it an argument, or we can choose not to.
@@ -75,7 +75,7 @@ Now, let's see how **blocks** work when called by a method.
 <br>
 
 
-##### { Blocks }
+#### Blocks
 
 <br>
 **[1] Defining  Blocks:**
