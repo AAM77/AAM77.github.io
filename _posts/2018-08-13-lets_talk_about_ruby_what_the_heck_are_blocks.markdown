@@ -1,6 +1,6 @@
 ---
 layout: post
-title:      "Ruby: What the Heck are Blocks?"
+title:      "Ruby: An Introduction to Ruby Blocks"
 date:       2018-08-13 18:10:58 -0400
 permalink:  lets_talk_about_ruby_what_the_heck_are_blocks
 ---
