@@ -1,10 +1,11 @@
 ---
 layout: post
-title:      "Ruby: An Introduction to 'yield' and How to Use it"
-date:       2018-08-21 07:15:26 +0000
+title:      "Ruby: An Introduction to Ruby's *yield* Keyword"
+date:       2018-08-21 03:15:27 -0400
 permalink:  ruby_an_introduction_to_yield_and_how_to_use_it
 ---
 
+# And How to Use it
 
 
 ## **{ Summary }**
