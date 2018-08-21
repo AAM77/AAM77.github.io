@@ -82,7 +82,7 @@ Passing a block to a method with the *yield* keyword inside it is sometimes refe
 
 ### **How to use *yield* in its simplest form**
 
-What I mean by "simplest" form is: *yield* without any arguments or something like **`block_given?`** and without passing it any blocks.
+What I mean by "simplest" form is: *yield* without any arguments or something like `block_given?` and without passing it any blocks.
 <br><br>
 When we are interested in passing a custom block to a method (and we know that we will always pass it a block), we can simply add *yield* inside the method where we want to insert (inject) the code we pass in via our block.
 ```
@@ -97,7 +97,9 @@ Then, when we call this method, we must pass a block to the method. If we fail t
 
 We use one of the following ways to pass a block to our method:<br>
 (1) <br>
-`method_2 { puts "First line }`<br>
+```
+method_2 { puts "First line }
+```<br>
 
 (2)
 ```
@@ -152,7 +154,7 @@ What happened here? Why didn't we get an error this time? Think about this for a
 <br><br>
 ***Ready?***
 <br><br>
-The reason we didn't get an error this time is because when our code was being parsed (read), Ruby came to the line **`yield if block_given?`** and evaluated it. By writting this in, we are explicitly telling Ruby that we want it to expect a block and replace *yield* with it **ONLY** if we pass a block to the method. When it sees that we did not pass a block to the method, Ruby continues on to the next line of code without issue. In the case of our example, the next line told it to output *Second line* to the screen.
+The reason we didn't get an error this time is because when our code was being parsed (read), Ruby came to the line `yield if block_given?` and evaluated it. By writting this in, we are explicitly telling Ruby that we want it to expect a block and replace *yield* with it **ONLY** if we pass a block to the method. When it sees that we did not pass a block to the method, Ruby continues on to the next line of code without issue. In the case of our example, the next line told it to output *Second line* to the screen.
 
 
 ### **How to use *yield* with Arguments**
@@ -167,7 +169,7 @@ def method_3
 end
 ```
 
-When we call it by passing a block: **`method_3 { |x| x + 5 }`**
+When we call it by passing a block: `method_3 { |x| x + 5 }`
 <br>
 
 We get the following output:
@@ -185,15 +187,15 @@ To understand what happened, let's break this down.
 
 **Second:**
 <br><br>
-When we pass in a block, we need to provide the block with the same number of variables as the number of arguments we passed to *yield*. If we pass three arguments to *yield*, we need to provide the block with three variables (one for each argument). For our example above, when we call the method by typing **`method_3 { |x| x + 5 }`**, we provide it with a variable '**x**' by placing it inside the pipes (vertical bars/lines) **`||`**. 
+When we pass in a block, we need to provide the block with the same number of variables as the number of arguments we passed to *yield*. If we pass three arguments to *yield*, we need to provide the block with three variables (one for each argument). For our example above, when we call the method by typing `method_3 { |x| x + 5 }`, we provide it with a variable '**x**' by placing it inside the pipes (vertical bars/lines) `||`. 
 
 **Third:**
 <br><br>
 Each variable we provide the block with takes on the value of each of the arguments we passed to *yield*. In our example, the '**x**' is assigned the value of the argument we passed in. So, in our example, the  '**x**' is assigned the value of '**7**'.
 
-**Fourth**
+**Fourth:**
 <br><br>
-When we call our method above using the block in our example: **`method_3 { |x| x + 5 }`**, the code of our method temporarily looks something like:
+When we call our method above using the block in our example: `method_3 { |x| x + 5 }`, the code of our method temporarily looks something like:
 
 ```
 def method_3
