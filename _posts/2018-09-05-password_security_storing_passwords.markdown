@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Password Security: Storing Passwords"
-date:       2018-09-05 21:04:05 +0000
+date:       2018-09-05 17:04:06 -0400
 permalink:  password_security_storing_passwords
 ---
 
@@ -43,7 +43,7 @@ Four methods used to store passwords include:<br>
 (5) Slow Hashes [*Briefly mentioned at the end as a "Final Note"* ]
 <br>
 
-##### Plain Text
+#### Plain Text
 
 Storing passwords in plain text is the least secure. Unfortunately, some well known companies still use this method. If a website lets users retrieve their passwords via email, there is a good chance it is being stored in plain text. What this means is that the password is stored the same way it is types in a users tables table on the database. It might look something like:
 
@@ -62,7 +62,7 @@ As you can see, each user's password and username are clearly visible in the dat
 <br>
 Authentication is simple with this method of password storage. A user enters the username and password for an account at the login screen. The system finds the account associated with the username. It then compares the stored password for the account with the input password. If it matches,the user gets logged in. Otherwise, not.<br>
 
-**Why it is weak**
+**Downsides**
 
 This part should be pretty obvious. There is no extra work involved for the hacker. All anyone has to do is gain access to the database. The worst part is that a hacker or anyone else who obtains the password will probably try the the same username and password combinations on other websites. Since users tend to re-use the same emails, usernames, and passwords,   such individuals could porentially access other accounts with the same information.<br>
 <br>
@@ -72,7 +72,7 @@ This part should be pretty obvious. There is no extra work involved for the hack
 *Not good.* Plain text is the absolute worst way to store passwords on a database. *Just don't do it.*<br>
 <br>
 
-##### Encryption
+#### Encryption
 
 Encryption is slightly more secure than plain text. Basic encryption involves using a special key to convert the password into a random string before storing it. However, the process is two way. The system can use the same key to decrypt the password and return it to its original form. This is problematic because even though the passwords are stored in their encrypted form, a hacker needs only the special key to decrypt them. Often times, the key is stored on the same server as the passwords, so this it not too difficult.<br>
 <br>
@@ -94,7 +94,7 @@ This is also what a hacker might see after first gaining access to the database.
 
 When a users want to login into an account, they enter the username and password associated with the account. The system finds the account by the username, if there is a match. Afterwards, it uses the master encryption key to decrypt the matching username's password (i.e. temporarily converts it back to the original password). It then compares this to the input password. If it matches, the system grants the user access to the account. Otherwise not.
 
-**Why it is weak**
+**Downsides**
 
 (1) If two or more users use the same password for each of their accounts, the encrypted string will look exactly the same for each of them. This is bad because anyone with access to the database might be able to use other clues stored in the database (like password hints) to figure out what the password is.<br>
 <br>
@@ -122,7 +122,7 @@ Once the encrypted passwords get converted to their original (decrypted) form, w
 *Not good.* Encryption is *not* a good way to store passwords.<br>
 <br>
 
-##### Hashing
+#### Hashing
 
 Similar to encryption, the basics of password hashing involves converting a password into a long string of seemingly random characters. This means that a string like ```peeler23``` might end up looking something like ```fk1Abjhg2kj4kooaSd112pfittynnl8329ayq4``` after it gets hashed.  So, when a user creates a new password, it gets hashed using this algorithm and key. This hash then gets stored in the database.<br>
 <br>
@@ -145,7 +145,7 @@ This looks similar to what we did using encryption. The difference, as I mention
 <br>
 When an existing user enters a username and password at log in, the system pulls up the account with the matching username. Since the system cannot convert the stored hash to its original form, the input password get converted to a hash, instead, using the same algorithm as before. This hash is compared to the one stored in the database. If it matches, the user gets successfully logged in. Otherwise, the user is denied access.<br>
 
-**Why it is weak**<br>
+**Downsides**<br>
 <br>
 (1) If two or more users have the same password, the hash that gets generated will also be the same. A hacker or anyone else with access to the database can use other information in the table (like password hints) to find the password. <br>
 <br>
@@ -154,7 +154,7 @@ When an existing user enters a username and password at log in, the system pulls
 (3) Rainbow tables exist for each hash generating algorithm: since the hash generated by the algorithm will always be the same for identical passwords across databases, hackers need to run their brute force tactic only once. Hackers have taken advantage of this weakness and created something called rainbow tables for each of the algorithms that exist for generating hashes. Each of these tables contains a collection of trillions of passwords with columns for a password and its respective hash. All any hacker needs to do is search for the hashes they are interested in to find out the password it represents. This is much quicker for them than having to do the work themselves. Google, has become a great resource for finding such rainbow tables. Some sites offer searches for multiple rainbow tables all-in-one: [CrackStation](https://crackstation.net/) .
 
 
-##### Salted Password Hashing
+#### Salted Password Hashing
 
 Generating a salted hash is similar to generating a regular hash, with one key difference: it gets salted. The process of adding salting a hash adds a new step before the password gets hashed:<br>
 <br>
@@ -222,7 +222,7 @@ When a user enters a username and password to log into an account, the system lo
 <br>
 (2) So, yes, a hacker *can* still use brute force to uncover the password. There is a key difference, however, is that they need more processing power to do so and, once they uncover a password, they uncover only one password for one account. The database might contain other accounts with the same password, but the unique salts prevent the hacker from knowing which ones those are. This makes life much more difficult for the hacker.
 
-### Final Note:
+#### Final Note:
 
 Okay, so there is one more type of hashing I learned about after I finished writing this blog: *Slow Hashes*.
 
