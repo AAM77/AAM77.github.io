@@ -34,7 +34,7 @@ Let's face it: there is a good chance that people tend to use the same password 
 One thing I want to point out before continuing is that there is no way to prevent hackers from using brute force to uncover passwords. As computer processors become faster, it becomes easier for hackers to use such methods. Fortunately, we can discourage them from doing so by making the process difficult or time consuming.<br>
 <br>
 
-### Methods for Storing Passwords
+### { Methods for Storing Passwords }
 
 Four methods used to store passwords include:<br>
 <br>
@@ -45,7 +45,7 @@ Four methods used to store passwords include:<br>
 (5) Slow Hashes [*Briefly mentioned at the end as a "Final Note"* ]
 <br>
 
-### Plain Text
+### { Plain Text }
 
 Storing passwords in plain text is the least secure. Unfortunately, some well known companies still use this method. If a website lets users retrieve their passwords via email, there is a good chance it is being stored in plain text. What this means is that the password is stored the same way it is types in a users tables table on the database. It might look something like:
 
@@ -74,7 +74,7 @@ This part should be pretty obvious. There is no extra work involved for the hack
 *Not good.* Plain text is the absolute worst way to store passwords on a database. *Just don't do it.*<br>
 <br>
 
-### Encryption
+### { Encryption }
 
 Encryption is slightly more secure than plain text. Basic encryption involves using a special key to convert the password into a random string before storing it. However, the process is two way. The system can use the same key to decrypt the password and return it to its original form. This is problematic because even though the passwords are stored in their encrypted form, a hacker needs only the special key to decrypt them. Often times, the key is stored on the same server as the passwords, so this it not too difficult.<br>
 <br>
@@ -124,7 +124,7 @@ Once the encrypted passwords get converted to their original (decrypted) form, w
 *Not good.* Encryption is *not* a good way to store passwords.<br>
 <br>
 
-### Hashing
+### { Hashing }
 
 Similar to encryption, the basics of password hashing involves converting a password into a long string of seemingly random characters. This means that a string like ```peeler23``` might end up looking something like ```fk1Abjhg2kj4kooaSd112pfittynnl8329ayq4``` after it gets hashed.  So, when a user creates a new password, it gets hashed using this algorithm and key. This hash then gets stored in the database.<br>
 <br>
@@ -160,7 +160,7 @@ When an existing user enters a username and password at log in, the system pulls
 *No, not really.* New algorithms keep emerging to "stay ahead of the game," but as computer systems become faster, it will take increasingly less time for hackers to crack them. They also aren't good because people can create rainbow tables for them. Once rainbow tables get created for an algorithm, it seems to become almost useless. That is my current understanding, at any rate.
 
 
-### Salted Password Hashing
+### { Salted Password Hashing }
 
 Generating a salted hash is similar to generating a regular hash, with one key difference: it gets salted. The process of adding salting a hash adds a new step before the password gets hashed:<br>
 <br>
@@ -232,11 +232,11 @@ When a user enters a username and password to log into an account, the system lo
 <br>
 *Yes (at least until someone comes up with something better*. The main strength of this lies in the difficulty of creating rainbow tables. *Note: *Slow hashes (see below) might work better).
 
-### Final Note:
+### Final Note: { Slow Salted Hashes }
 
 Okay, so there is one more type of hashing I learned about after I finished writing this blog: *Slow Hashes*.
 
-Slow hashes differ from the hashes above in that their algorithms take longer to compute a hash for a particular password. This includes the password a user (or hacker) enters during login. This slows down each brute force attack, which decreases the number of attempts a hacker can make per hour, for example. [Bcrypt](https://en.wikipedia.org/wiki/Bcrypt)'s hashing algortihm does something similar to this. Ruby (with the Sinatra and Rails frameworks) has its own [Bcrypt gem](https://github.com/codahale/bcrypt-ruby).
+Slow hashes differ from the hashes above in that their algorithms take longer to compute a hash for a particular password. This includes the password a user (or hacker) enters during login. This slows down each brute force attack, which decreases the number of attempts a hacker can make per hour, for example. [Bcrypt](https://en.wikipedia.org/wiki/Bcrypt)'s hashing algortihm does something similar to this. Ruby (with the Sinatra and Rails frameworks) has its own [bcrypt gem](https://github.com/codahale/bcrypt-ruby).
 
 
 ## Sources:
