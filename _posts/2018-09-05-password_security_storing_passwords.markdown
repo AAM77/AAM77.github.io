@@ -205,8 +205,8 @@ user id |   username    |        salt        |       password + salt      |     
         |               |                    |                            |
 ```
 <br>
-Note: The **hash value** may also be referred to as the ***password digest***
-This is only an example because the password never gets stored in the table. Only the **user id**, **username**, **salt**,  and **hash value** get stored:<br>
+***Note:*** The *hash value* may also be referred to as the *password digest*.
+This is only an example because the password never gets stored in the table. That would defeat the purpose of a salted hash. Only the *user id*, *username*, *salt*,  and *hash value* get stored:<br>
 
 ```
 user id |   username    |        salt        |            hash value
